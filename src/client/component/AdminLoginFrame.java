@@ -2,8 +2,11 @@ package client.component;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
-public class AdminLoginFrame extends JFrame {
+import util.AdminLoginCheck;
+
+public class AdminLoginFrame extends JFrame implements ActionListener{
     private JTextField idField;
     private JPasswordField pwField;
     private int loginAttempts = 0;
@@ -90,29 +93,17 @@ public class AdminLoginFrame extends JFrame {
         goButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // 버튼 액션
-        goButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleLogin();
-            }
-        });
-
+        goButton.addActionListener(this);
         // Enter 키로 로그인
-        pwField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleLogin();
-            }
-        });
+        pwField.addActionListener(this);
 
         mainPanel.add(goButton);
 
         add(mainPanel);
         setVisible(true);
     }
-
-    private void handleLogin() {
-        if (loginAttempts >= MAX_ATTEMPTS) {
+    public void actionPerformed(ActionEvent e) {
+        if(AdminLoginCheck.COUNT == 0) {
             JOptionPane.showMessageDialog(this,
                     "로그인 시도 횟수를 초과했습니다.\n프로그램을 종료합니다.",
                     "로그인 제한",
@@ -120,36 +111,19 @@ public class AdminLoginFrame extends JFrame {
             System.exit(0);
             return;
         }
-
-        String id = idField.getText();
-        String pw = new String(pwField.getPassword());
-
-        if (id.equals("admin") && pw.equals("1234")) {
-            // 로그인 성공
-            this.dispose();
-            new MainFrame();
+        if(AdminLoginCheck.check(idField.getText(), new String(pwField.getPassword()))) {
+            JOptionPane.showMessageDialog(this,
+                    "환영합니다 "+idField.getText()+"님",
+                    "환영합니다.",JOptionPane.INFORMATION_MESSAGE);
         } else {
-            // 로그인 실패
-            loginAttempts++;
-            int remainingAttempts = MAX_ATTEMPTS - loginAttempts;
-
-            if (remainingAttempts > 0) {
-                JOptionPane.showMessageDialog(this,
-                        "아이디 또는 비밀번호가 일치하지 않습니다.\n남은 시도 횟수: " + remainingAttempts,
-                        "로그인 실패",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "로그인 시도 횟수를 초과했습니다.\n프로그램을 종료합니다.",
-                        "로그인 제한",
-                        JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
-            }
-
-            pwField.setText("");
-            pwField.requestFocus();
+            JOptionPane.showMessageDialog(this,
+                    "아이디 또는 비밀번호가 일치하지 않습니다.\n남은 시도 횟수: " + AdminLoginCheck.COUNT,
+                    "로그인 실패",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
+
+
 
     public static void start() {
         SwingUtilities.invokeLater(new Runnable() {
