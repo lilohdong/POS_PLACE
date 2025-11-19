@@ -1,9 +1,9 @@
 package db;
 
-public class MemberDAO {
+public class MemberDTO {
     private final String id;
 
-    public MemberDAO(String id) {
+    public MemberDTO(String id) {
         this.id = id;
     }
 }
