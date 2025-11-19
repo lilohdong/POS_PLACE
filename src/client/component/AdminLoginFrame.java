@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import util.AdminLoginCheck;
+import util.*;
 
 public class AdminLoginFrame extends JFrame implements ActionListener{
     private JTextField idField;
@@ -117,6 +117,8 @@ public class AdminLoginFrame extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this,
                     "환영합니다 "+idField.getText()+"님",
                     "환영합니다.",JOptionPane.INFORMATION_MESSAGE);
+            new MainFrame();
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this,
                     "아이디 또는 비밀번호가 일치하지 않습니다.\n남은 시도 횟수: " + AdminLoginCheck.COUNT,
