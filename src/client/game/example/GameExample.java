@@ -5,35 +5,25 @@ import javax.swing.*;
 
 import util.*;
 
+import java.awt.*;
+
 public class GameExample extends JFrame {
 
     public GameExample() {
-        initUI();
-    }
-
-    private void initUI() {
-        setTitle("게임 통계");
+        GameMainPanel gp = new GameMainPanel();
+        setTitle("Game Example");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1016, 832);
         setLocationRelativeTo(null);
-        setLayout(null);
         setResizable(false);
 
-        // 헤더 패널
-        GameHeaderPanel headerPanel = new GameHeaderPanel();
-        headerPanel.setBounds(0, 0, 1016, 74);
-        add(headerPanel);
+        Container ct = getContentPane();
+        setLayout(null);
+        setSize(new Dimension(1280,832));
 
-        // 인기게임 순위 패널
-        PopularGameRankingPanel rankingPanel = new PopularGameRankingPanel();
-        rankingPanel.setBounds(0, 74, 269, 758);
-        add(rankingPanel);
-
-        // 메인 게임 통계 패널
-        MainGameStatistics mainStats = new MainGameStatistics();
-        mainStats.setBounds(269, 74, 747, 758);
-        add(mainStats);
+        ct.add(gp);
     }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
