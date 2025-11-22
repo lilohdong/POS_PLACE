@@ -1,4 +1,4 @@
-package client.sales;
+package client.order;
 
 import javax.swing.JPanel;
 
