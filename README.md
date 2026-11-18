@@ -63,7 +63,7 @@ mysql -u root -p < dumy_data_init.sql
 ./gradlew run
 ```
 
-DB 접속 정보는 `app/src/main/java/db/DBConnection.java`에 있습니다. 기본값은 `localhost:3306`, `root`, `1234`라서 환경이 다르면 여기를 고칩니다.
+실행 전에 `app/src/main/resources/db.properties.example`을 같은 폴더에 `db.properties`로 복사하고 DB 주소, 계정, 비밀번호를 적습니다. 이 파일은 git에 올라가지 않습니다. 환경 변수 `POS_DB_URL`, `POS_DB_USER`, `POS_DB_PASSWORD`로 줘도 됩니다.
 
 예시 데이터를 넣었다면 직원 이름 `admin`, 비밀번호 `1234`로 로그인합니다. 비밀번호를 5번 틀리면 프로그램이 꺼집니다.
 
