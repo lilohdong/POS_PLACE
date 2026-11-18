@@ -1,0 +1,6 @@
+# 이 파일을 같은 폴더에 db.properties로 복사해 값을 채운다. db.properties는 git에 올리지 않는다.
+# 환경 변수 POS_DB_URL, POS_DB_USER, POS_DB_PASSWORD가 있으면 그 값이 우선한다.
+# db.url 형식 예: jdbc:mysql://localhost:3306/POS_PLACE
+db.url=
+db.user=
+db.password=

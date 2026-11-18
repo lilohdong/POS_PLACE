@@ -7,3 +7,5 @@ build
 .idea
 .vscode
 out
+# DB 접속 정보 (예시는 db.properties.example)
+app/src/main/resources/db.properties
